@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Q1 2026 GAR Executive Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Q1 2026 GAR</p>
+        <h1>Executive Performance Dashboard</h1>
+        <p class="subtitle">Supply chain visibility, order fulfillment, receipt performance, and facility consumption coverage</p>
+      </div>
+      <div class="header-actions">
+        <button id="resetFilters" class="ghost-button" type="button">Reset filters</button>
+        <button id="printDashboard" class="primary-button" type="button">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="filters" aria-label="Dashboard filters">
+        <label>
+          Month
+          <select id="monthFilter"></select>
+        </label>
+        <label>
+          Region
+          <select id="regionFilter"></select>
+        </label>
+        <label>
+          District
+          <select id="districtFilter"></select>
+        </label>
+        <label>
+          Facility type
+          <select id="typeFilter"></select>
+        </label>
+        <label>
+          Supplier
+          <select id="supplierFilter"></select>
+        </label>
+        <label>
+          Order state
+          <select id="stateFilter"></select>
+        </label>
+        <label>
+          Consumption count
+          <select id="consumedFilter"></select>
+        </label>
+        <label class="search-field">
+          Facility / site
+          <input id="siteSearch" type="search" placeholder="Search name" />
+        </label>
+      </section>
+
+      <section class="tabs" aria-label="Dashboard pages">
+        <button class="tab-button active" type="button" data-page="summary">Executive Summary</button>
+        <button class="tab-button" type="button" data-page="orders">Orders & Receipts</button>
+        <button class="tab-button" type="button" data-page="tat">TAT Bottlenecks</button>
+        <button class="tab-button" type="button" data-page="consumption">Consumption Coverage</button>
+        <button class="tab-button" type="button" data-page="quality">Data Quality</button>
+      </section>
+
+      <section id="summary" class="page active">
+        <div id="kpiGrid" class="kpi-grid"></div>
+        <div id="callouts" class="callouts"></div>
+        <div class="dashboard-grid two-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Monthly order volume</h2>
+              <span id="ordersScope"></span>
+            </div>
+            <div id="monthlyOrdersChart" class="chart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Receipt status</h2>
+            </div>
+            <div id="stateChart" class="chart"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="orders" class="page">
+        <div class="dashboard-grid two-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Orders by region</h2>
+            </div>
+            <div id="regionOrdersChart" class="chart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Orders by facility type</h2>
+            </div>
+            <div id="typeOrdersChart" class="chart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Top districts by order volume</h2>
+            </div>
+            <div id="districtVolumeChart" class="chart tall"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Order detail</h2>
+              <span id="orderTableCount"></span>
+            </div>
+            <div class="table-wrap">
+              <table id="orderTable"></table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="tat" class="page">
+        <div class="dashboard-grid two-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Average TAT by stage</h2>
+            </div>
+            <div id="tatStageChart" class="chart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Districts with longest delivery TAT</h2>
+            </div>
+            <div id="deliveryTatChart" class="chart tall"></div>
+          </article>
+        </div>
+        <article class="panel">
+          <div class="panel-heading">
+            <h2>Regional / district / type matrix</h2>
+            <span id="matrixCount"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="matrixTable"></table>
+          </div>
+        </article>
+      </section>
+
+      <section id="consumption" class="page">
+        <div class="dashboard-grid two-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Consumption coverage by region</h2>
+            </div>
+            <div id="coverageRegionChart" class="chart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Facilities by months consumed</h2>
+            </div>
+            <div id="consumedCountChart" class="chart"></div>
+          </article>
+        </div>
+        <article class="panel">
+          <div class="panel-heading">
+            <h2>District consumption coverage</h2>
+            <span id="coverageTableCount"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="coverageTable"></table>
+          </div>
+        </article>
+      </section>
+
+      <section id="quality" class="page">
+        <article class="panel">
+          <div class="panel-heading">
+            <h2>Data-quality notes</h2>
+          </div>
+          <div id="qualityNotes" class="quality-list"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
